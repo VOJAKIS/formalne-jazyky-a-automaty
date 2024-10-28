@@ -1,13 +1,13 @@
 # Dokumentácia zadania č. 1
 
-## Obsah dokumentácie
+## Obsah
 - [Dokumentácia zadania č. 1](#dokumentácia-zadania-č-1)
-	- [Obsah dokumentácie](#obsah-dokumentácie)
+	- [Obsah](#obsah)
 	- [Základné informácie](#základné-informácie)
 	- [Spustenie programu](#spustenie-programu)
+		- [Zadanie vstupu zo súboru](#zadanie-vstupu-zo-súboru)
+		- [Zadanie vstupu zo súboru](#zadanie-vstupu-zo-súboru-1)
 		- [Build aplikácie](#build-aplikácie)
-		- [Manuálne zadanie vstupu:](#manuálne-zadanie-vstupu)
-		- [Zadanie vstupu zo súboru:](#zadanie-vstupu-zo-súboru)
 	- [Spustenie testov](#spustenie-testov)
 	- [Stručný rozbor riešenia](#stručný-rozbor-riešenia)
 	- [Príklad:](#príklad)
@@ -26,18 +26,18 @@ Regulárny výraz | [a]b{a\|b}
 <br>
 
 ## Spustenie programu
+### Zadanie vstupu zo súboru
+```sh
+java -jar zadanie1-0.1.jar
+```
+### Zadanie vstupu zo súboru
+```sh
+java -jar zadanie1-0.1.jar file.txt
+```
 ### Build aplikácie
 ```sh
 mvn clean package
-```
-
-### Manuálne zadanie vstupu:
-```sh
-java -jar output/zadanie1-0.1.jar
-```
-### Zadanie vstupu zo súboru:
-```sh
-java -jar output/zadanie1-0.1.jar file.txt
+java -jar target/zadanie1-0.1.jar
 ```
 
 <br>
