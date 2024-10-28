@@ -5,8 +5,8 @@
 	- [Obsah](#obsah)
 	- [Základné informácie](#základné-informácie)
 	- [Spustenie programu](#spustenie-programu)
+		- [Zadanie vstupu manuálne](#zadanie-vstupu-manuálne)
 		- [Zadanie vstupu zo súboru](#zadanie-vstupu-zo-súboru)
-		- [Zadanie vstupu zo súboru](#zadanie-vstupu-zo-súboru-1)
 		- [Build aplikácie](#build-aplikácie)
 	- [Spustenie testov](#spustenie-testov)
 	- [Stručný rozbor riešenia](#stručný-rozbor-riešenia)
@@ -26,7 +26,7 @@ Regulárny výraz | [a]b{a\|b}
 <br>
 
 ## Spustenie programu
-### Zadanie vstupu zo súboru
+### Zadanie vstupu manuálne
 ```sh
 java -jar zadanie1-0.1.jar
 ```
