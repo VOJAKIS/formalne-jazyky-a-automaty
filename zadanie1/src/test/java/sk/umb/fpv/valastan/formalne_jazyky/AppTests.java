@@ -6,10 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Unit test for simple App.
- */
-public class MainTest {
+public class AppTests {
 	@Test
 	public void givenValidInputs_whenMain_thenPrintSuccess() {
 		List<String> validInputs = Arrays.asList(
@@ -24,10 +21,10 @@ public class MainTest {
 				"abb");
 
 		validInputs.forEach(input -> {
-			if (Main.DEBUG) {
+			if (App.DEBUG) {
 				System.out.println(String.format("input: %s", input));
 			}
-			assertEquals(Main.SUCCESS, Main.consumeInput(input));
+			assertEquals(App.SUCCESS, App.consumeInput(input));
 		});
 	}
 
@@ -40,10 +37,10 @@ public class MainTest {
 				"c");
 
 		invalidInputs.forEach(input -> {
-			if (Main.DEBUG) {
+			if (App.DEBUG) {
 				System.out.println(String.format("input: %s", input));
 			}
-			assertEquals(Main.FAILURE, Main.consumeInput(input));
+			assertEquals(App.FAILURE, App.consumeInput(input));
 		});
 	}
 }

@@ -21,7 +21,7 @@ import java.util.Scanner;
  *         q2,b -> q2
  *         q2 -> finished
  */
-public class Main {
+public class App {
 	public static final boolean DEBUG = false;
 
 	public static final String SUCCESS = "A";
@@ -30,20 +30,20 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		String regex = "[a]b{a|b}";
 		if (args != null && args.length != 0 && args[0] != null) {
-			if (Main.DEBUG) {
+			if (App.DEBUG) {
 				System.out.println(args);
 			}
 
 			String filename = args[0];
 			String content = Files.readString(Paths.get(filename));
-			String input = content;
+			String input = content.replace("\n", "").replace("\r", "");
 
-			String alert = String.format("Vstup zo súboru: %s", input);
+			String alert = String.format("Vstup zo súboru: '%s'", input);
 			System.out.println(alert);
 
 			consumeInput(input);
 		} else {
-			String alert = String.format("Zadajte vstup pre regex \"%s\": ", regex);
+			String alert = String.format("Zadajte vstup pre regex '%s': ", regex);
 			System.out.print(alert);
 			Scanner s = new Scanner(System.in);
 			consumeInput(s.next().trim());
@@ -52,27 +52,27 @@ public class Main {
 	}
 
 	public static String consumeInput(String input) {
-		if (Main.DEBUG) {
+		if (App.DEBUG) {
 			System.out.println(input);
 		}
 
 		String finalString = q0(input);
 
-		if (Main.DEBUG) {
+		if (App.DEBUG) {
 			System.out.println(finalString);
 		}
 
 		if (finalString != null && finalString.length() == 0) {
-			System.out.println(Main.SUCCESS);
-			return Main.SUCCESS;
+			System.out.println(App.SUCCESS);
+			return App.SUCCESS;
 		} else {
-			System.out.println(Main.FAILURE);
-			return Main.FAILURE;
+			System.out.println(App.FAILURE);
+			return App.FAILURE;
 		}
 	}
 
 	public static String q0(String input) {
-		if (Main.DEBUG) {
+		if (App.DEBUG) {
 			System.out.println(input);
 		}
 
@@ -88,7 +88,7 @@ public class Main {
 	}
 
 	public static String q1(String input) {
-		if (Main.DEBUG) {
+		if (App.DEBUG) {
 			System.out.println(input);
 		}
 
@@ -105,7 +105,7 @@ public class Main {
 	}
 
 	public static String q2(String input) {
-		if (Main.DEBUG) {
+		if (App.DEBUG) {
 			System.out.println(input);
 		}
 
