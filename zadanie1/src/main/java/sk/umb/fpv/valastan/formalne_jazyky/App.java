@@ -38,7 +38,13 @@ public class App {
 			String content = Files.readString(Paths.get(filename));
 			String input = content.replace("\n", "").replace("\r", "");
 
-			String alert = String.format("Vstup zo súboru: '%s'", input);
+			String template = "Vstup zo súboru: '%s'%s";
+			String alert;
+			if (input.length() >= 100) {
+				alert = String.format(template, input.substring(0, 99), " (bolo vypísaných len prvých 100 znakov)");
+			} else {
+				alert = String.format(template, input, "");
+			}
 			System.out.println(alert);
 
 			consumeInput(input);
