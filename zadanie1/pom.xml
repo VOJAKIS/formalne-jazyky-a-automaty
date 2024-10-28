@@ -6,7 +6,7 @@
 
 	<groupId>sk.umb.fpv.valastan.formalne_jazyky</groupId>
 	<artifactId>zadanie1</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>0.1</version>
 	<packaging>jar</packaging>
 
 	<name>zadanie1</name>
