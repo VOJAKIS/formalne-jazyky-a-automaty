@@ -5,6 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import sk.umb.fpv.valastan.formalne_jazyky.exception.InvalidInputException;
+import sk.umb.fpv.valastan.formalne_jazyky.exception.InvalidInputExceptionMessage;
+
 /**
  * @author Adam Valašťan
  * 
@@ -47,70 +50,71 @@ public class App {
 			}
 			System.out.println(alert);
 
-			consumeInput(input);
+			try {
+				consumeInput(input);
+				System.out.println(App.SUCCESS);
+			} catch (InvalidInputException e) {
+				System.out.println(App.FAILURE);
+			}
 		} else {
 			String alert = String.format("Zadajte vstup pre regex '%s': ", regex);
 			System.out.print(alert);
 			Scanner s = new Scanner(System.in);
-			consumeInput(s.next().trim());
+			String input = s.next().trim();
+
+			try {
+				consumeInput(input);
+				System.out.println(App.SUCCESS);
+			} catch (InvalidInputException e) {
+				System.out.println(App.FAILURE);
+			}
+
 			s.close();
 		}
 	}
 
-	public static String consumeInput(String input) {
+	public static void consumeInput(String input) throws InvalidInputException {
 		if (App.DEBUG) {
 			System.out.println(input);
 		}
 
-		String finalString = q0(input);
-
-		if (App.DEBUG) {
-			System.out.println(finalString);
-		}
-
-		if (finalString != null && finalString.length() == 0) {
-			System.out.println(App.SUCCESS);
-			return App.SUCCESS;
-		} else {
-			System.out.println(App.FAILURE);
-			return App.FAILURE;
-		}
+		q0(input);
 	}
 
-	public static String q0(String input) {
+	public static String q0(String input) throws InvalidInputException {
 		if (App.DEBUG) {
 			System.out.println(input);
 		}
 
 		if (input.length() == 0)
-			return null;
+			throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
 		if (input.charAt(0) == 'a') {
 			return q1(input.substring(1));
 		}
 		if (input.charAt(0) == 'b') {
 			return q2(input.substring(1));
 		}
-		return null;
+		throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
 	}
 
-	public static String q1(String input) {
+	public static String q1(String input) throws InvalidInputException {
 		if (App.DEBUG) {
 			System.out.println(input);
 		}
 
 		if (input.length() == 0) {
-			return null;
+			throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
 		}
 		if (input.charAt(0) == 'a') {
-			return null;
+			throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
 		}
 		if (input.charAt(0) == 'b') {
 			return q2(input.substring(1));
 		}
-		return null;
+		throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
 	}
 
-	public static String q2(String input) {
+	public static String q2(String input) throws InvalidInputException {
 		if (App.DEBUG) {
 			System.out.println(input);
 		}
@@ -124,6 +128,6 @@ public class App {
 		if (input.charAt(0) == 'b') {
 			return q2(input.substring(1));
 		}
-		return null;
+		throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
 	}
 }
