@@ -11,7 +11,6 @@ import sk.umb.fpv.valastan.formalne_jazyky.exception.InvalidInputExceptionMessag
 /**
  * @author Adam Valašťan
  * 
- * 
  *         RegEx: [a]b{a|b}
  * 
  *         q0,a -> q1
@@ -25,7 +24,7 @@ import sk.umb.fpv.valastan.formalne_jazyky.exception.InvalidInputExceptionMessag
  *         q2 -> finished
  */
 public class App {
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = Boolean.FALSE;
 
 	public static final String SUCCESS = "A";
 	public static final String FAILURE = "N";
@@ -50,84 +49,108 @@ public class App {
 			}
 			System.out.println(alert);
 
-			try {
-				consumeInput(input);
-				System.out.println(App.SUCCESS);
-			} catch (InvalidInputException e) {
-				System.out.println(App.FAILURE);
-			}
+			String output = consumeInput(input);
+			System.out.println(output);
 		} else {
 			String alert = String.format("Zadajte vstup pre regex '%s': ", regex);
 			System.out.print(alert);
 			Scanner s = new Scanner(System.in);
 			String input = s.next().trim();
 
-			try {
-				consumeInput(input);
-				System.out.println(App.SUCCESS);
-			} catch (InvalidInputException e) {
-				System.out.println(App.FAILURE);
-			}
+			String output = consumeInput(input);
+			System.out.println(output);
 
 			s.close();
 		}
 	}
 
-	public static void consumeInput(String input) throws InvalidInputException {
+	public static String consumeInput(String input) {
 		if (App.DEBUG) {
 			System.out.println(input);
 		}
 
-		q0(input);
+		int startingIndex = 0;
+		try {
+			q0(input, startingIndex);
+			return App.SUCCESS;
+		} catch (InvalidInputException e) {
+			return App.FAILURE;
+		}
 	}
 
-	public static String q0(String input) throws InvalidInputException {
+	public static void q0(String input, int characterIndex) throws InvalidInputException {
 		if (App.DEBUG) {
-			System.out.println(input);
-		}
-
-		if (input.length() == 0)
-			throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
-		if (input.charAt(0) == 'a') {
-			return q1(input.substring(1));
-		}
-		if (input.charAt(0) == 'b') {
-			return q2(input.substring(1));
-		}
-		throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
-	}
-
-	public static String q1(String input) throws InvalidInputException {
-		if (App.DEBUG) {
-			System.out.println(input);
+			System.out.println(input + " " + characterIndex);
 		}
 
 		if (input.length() == 0) {
 			throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
 		}
-		if (input.charAt(0) == 'a') {
-			throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
+
+		if (input.charAt(characterIndex) == 'a') {
+			q1(input, ++characterIndex);
+			return;
 		}
-		if (input.charAt(0) == 'b') {
-			return q2(input.substring(1));
+
+		if (input.charAt(characterIndex) == 'b') {
+			q2(input, ++characterIndex);
+			return;
 		}
+
 		throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
 	}
 
-	public static String q2(String input) throws InvalidInputException {
+	public static void q1(String input, int characterIndex) throws InvalidInputException {
 		if (App.DEBUG) {
-			System.out.println(input);
+			System.out.println(input + " " + characterIndex);
 		}
 
 		if (input.length() == 0) {
-			return input;
+			throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
 		}
-		if (input.charAt(0) == 'a') {
-			return q2(input.substring(1));
+
+		if (characterIndex >= input.length()) {
+			if (input.charAt(characterIndex - 1) == 'a') {
+				throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
+			}
+			return;
 		}
-		if (input.charAt(0) == 'b') {
-			return q2(input.substring(1));
+
+		if (input.charAt(characterIndex) == 'a') {
+			throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
 		}
+
+		if (input.charAt(characterIndex) == 'b') {
+			q2(input, ++characterIndex);
+			return;
+		}
+
+		throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
+	}
+
+	public static void q2(String input, int characterIndex) throws InvalidInputException {
+		if (App.DEBUG) {
+			System.out.println(input + " " + characterIndex);
+		}
+
+		if (input.length() == 0) {
+			return;
+		}
+
+		if (characterIndex >= input.length()) {
+			return;
+		}
+
+		if (input.charAt(characterIndex) == 'a') {
+			q2(input, ++characterIndex);
+			return;
+		}
+
+		if (input.charAt(characterIndex) == 'b') {
+			q2(input, ++characterIndex);
+			return;
+		}
+
 		throw new InvalidInputException(InvalidInputExceptionMessage.INVALID_INPUT);
 	}
 }

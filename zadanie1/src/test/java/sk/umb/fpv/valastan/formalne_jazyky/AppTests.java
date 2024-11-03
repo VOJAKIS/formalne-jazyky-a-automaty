@@ -16,21 +16,29 @@ public class AppTests {
 				"bab",
 				"bba",
 				"ab",
-				"ab",
 				"aba",
-				"abb");
+				"aba",
+				"abaaaa");
 
 		validInputs.forEach(input -> {
 			if (App.DEBUG) {
 				System.out.println(String.format("input: %s", input));
 			}
-			assertEquals(App.SUCCESS, App.consumeInput(input));
+
+			String output = App.consumeInput(input);
+
+			if (App.DEBUG) {
+				System.out.println(String.format("output: %s", output));
+			}
+
+			assertEquals(App.SUCCESS, output);
 		});
 	}
 
 	@Test
 	public void givenInvalidInputs_whenMain_thenPrintFailure() {
 		List<String> invalidInputs = Arrays.asList(
+				"",
 				"a",
 				"aa",
 				"aaa",
@@ -40,7 +48,14 @@ public class AppTests {
 			if (App.DEBUG) {
 				System.out.println(String.format("input: %s", input));
 			}
-			assertEquals(App.FAILURE, App.consumeInput(input));
+
+			String output = App.consumeInput(input);
+
+			if (App.DEBUG) {
+				System.out.println(String.format("output: %s", output));
+			}
+
+			assertEquals(App.FAILURE, output);
 		});
 	}
 }
