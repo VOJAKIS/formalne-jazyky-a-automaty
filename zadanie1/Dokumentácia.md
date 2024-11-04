@@ -7,7 +7,7 @@
 	- [Spustenie programu](#spustenie-programu)
 		- [Zadanie vstupu manuálne](#zadanie-vstupu-manuálne)
 		- [Zadanie vstupu zo súboru](#zadanie-vstupu-zo-súboru)
-		- [Build aplikácie](#build-aplikácie)
+		- [Build a spustenie aplikácie](#build-a-spustenie-aplikácie)
 	- [Spustenie testov](#spustenie-testov)
 	- [Stručný rozbor riešenia](#stručný-rozbor-riešenia)
 	- [Príklad:](#príklad)
@@ -22,6 +22,7 @@
 Meno a priezvisko | Bc. Adam Valašťan
 Zadanie |	zadanie č. 1
 Regulárny výraz | [a]b{a\|b}
+Programovací jazyk | Java21
 
 <br>
 
@@ -34,7 +35,7 @@ java -jar zadanie1-0.1.jar
 ```sh
 java -jar zadanie1-0.1.jar file.txt
 ```
-### Build aplikácie
+### Build a spustenie aplikácie
 ```sh
 mvn clean package
 java -jar target/zadanie1-0.1.jar
