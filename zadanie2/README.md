@@ -17,7 +17,7 @@
 | | |
 |-|-|
 Meno a priezvisko | Bc. Adam Valašťan
-Zadanie |	zadanie č. 2
+Zadanie |	[zadanie č. 2](https://kurzy.kpi.fei.tuke.sk/fj/labs/05.html)
 Programovací jazyk | Java21
 
 <br>
