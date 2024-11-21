@@ -1,1 +1,1 @@
-# formalne-jazyky-a-automaty
+# Formálne jazyky a automaty
