@@ -2,5 +2,12 @@ package sk.umb.fpv.valastan.formalne_jazyky;
 
 // https://kurzy.kpi.fei.tuke.sk/fj/labs/resources/cv5/uml-new.png
 public enum Token {
-	I_LOVE_FORMAL_LANGUAGES
+	PLUS,
+	MINUS,
+	MULTIPLICATION,
+	DIVISION,
+	NUMBER,
+	LEFT_PARENTHESES,
+	RIGHT_PARENTHESES,
+	END_OF_FILE
 }
