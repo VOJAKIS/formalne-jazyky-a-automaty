@@ -16,6 +16,7 @@
 		<maven.compiler.release>21</maven.compiler.release>
 		<maven.compiler.target>21</maven.compiler.target>
 		<maven.compiler.source>21</maven.compiler.source>
+		<exec.mainClass>sk.umb.fpv.valastan.formalne_jazyky.Main</exec.mainClass>
 	</properties>
 
 	<dependencyManagement>
