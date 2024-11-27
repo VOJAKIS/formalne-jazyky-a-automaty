@@ -102,7 +102,7 @@
 						<archive>
 							<manifest>
 								<addClasspath>true</addClasspath>
-								<mainClass>sk.umb.fpv.valastan.formalne_jazyky.App</mainClass>
+								<mainClass>sk.umb.fpv.valastan.formalne_jazyky.Main</mainClass>
 							</manifest>
 						</archive>
 					</configuration>
