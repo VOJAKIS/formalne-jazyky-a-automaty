@@ -1,15 +1,16 @@
-# Dokumentácia - jednoduchý riadkovo-orientovaný kalkulátor
+# Dokumentácia zadania č. 2
 
 ## Obsah
-- [Dokumentácia - jednoduchý riadkovo-orientovaný kalkulátor](#dokumentácia---jednoduchý-riadkovo-orientovaný-kalkulátor)
+- [Dokumentácia zadania č. 2](#dokumentácia-zadania-č-2)
 	- [Obsah](#obsah)
 	- [Základné informácie](#základné-informácie)
 	- [Spustenie programu](#spustenie-programu)
+		- [Build a spustenie aplikácie](#build-a-spustenie-aplikácie)
 	- [Spustenie testov](#spustenie-testov)
 	- [Stručný rozbor riešenia](#stručný-rozbor-riešenia)
 	- [Príklad:](#príklad)
-		- [Akceptované reťazce](#akceptované-reťazce)
-		- [Neakceptované reťazce](#neakceptované-reťazce)
+		- [Akceptované výrazy](#akceptované-výrazy)
+		- [Neakceptované výrazy](#neakceptované-výrazy)
 
 <br>
 
@@ -19,16 +20,14 @@
 Meno a priezvisko | Bc. Adam Valašťan
 Zadanie |	[zadanie č. 2](https://kurzy.kpi.fei.tuke.sk/fj/labs/05.html)
 Programovací jazyk | Java21
+Maven | Maven 3.9.3
 
 <br>
 
 ## Spustenie programu
-0. Skompilujeme projekt pomocou príkazu
+### Build a spustenie aplikácie
 ```sh
 mvn clean package
-```
-1. Spustíme skompilovaný súbor
-```sh
 java -jar target/zadanie2-0.1.jar
 ```
 
@@ -40,27 +39,41 @@ mvn test
 ```
 
 <br>
+<br>
 
 ## Stručný rozbor riešenia
-Na riešenie problému som zatiaľ neprišiel.
-<!-- 1. Riešenie som vypracoval tak, že som nakreslil prechodový diagram podľa regulárneho výrazu.
-2. Pomocou prechodového diagramu som zostrojil DKA.
-3. Pomocou DKA som vytvoril funkcie, podľa názvu stavov (q0, q1, ...), ktoré "konzumujú" vstupný reťazec.
-4. Pokiaľ je vstupný reťazec validný, tak funkcia vráti prázdny znak ("") a vypíše sa "A".
-5. Pokiaľ nie je vstupný reťazec validný, tak funkcia vráti null a vypíše sa "N". -->
+1. Riešenie som vypracoval tak, že som si prepísal gramatiku, ktorá bola odprezentovaná na hodine. Všimnime si gramatiku nižšie:
+	```js
+	E -> T { "+" | "-" T }
+	T -> F { "*" | "/" T }
+	F -> id | number | "("E")"
+	```
+
+2. Pomocou tejto gramatiky som zostrojil dané metódy, pričom som sa nechal inšpirovať predlohou z [webovej stránky zadania](https://kurzy.kpi.fei.tuke.sk/fj/labs/05.html). Metódy sa moc nelíšia od predošlého zadania, keďže aj pri tomto zadaní používame rekurziu na výpočet výrazov.
+
+3. Pokiaľ je vstupný výraz validný, tak sa vypočíta jeho konečná hodnota.
+	1. Ak sa vo výraze nachádzajú premenné, program si pre dané premenné vypýta hodnoty.
+
+4. Pokiaľ nie je vstupný výraz validný, tak program vyhodí `CalculatorException` s dôvodom chyby.
 
 <br>
 
 ## Príklad:
-
-### Akceptované reťazce
-|vstup|výstup|
+### Akceptované výrazy
+| Vstupný výraz | Výsledok |
 |-|-|
+1+2 | 3
+2-1 | 1
+2*1 | 2
+8/2 | 4
 1+2*3 | 7
 (1+2)*3 | 9
-x+y | zadaj x=, zadaj y= (predpokladáme x=2, y=5), výsledok 7
+1+x | 2 (dodatočné dosadenie x=1)
+1+x+y | 6 (dodatočné dosadenie x=2, y=3)
 
-### Neakceptované reťazce
-|vstup|výstup|
-|-|-|
-1+2*-+|chyba
+### Neakceptované výrazy
+| Neakceptované výrazy |
+|-|
+1++2
+1**2
+1+2*-+
