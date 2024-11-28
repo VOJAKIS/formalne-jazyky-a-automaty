@@ -46,7 +46,7 @@ mvn test
 	```js
 	E -> T { "+" | "-" T }
 	T -> F { "*" | "/" T }
-	F -> id | number | "("E")"
+	F -> "0"-"9" | "("E")"
 	```
 
 2. Pomocou tejto gramatiky som zostrojil dané metódy, pričom som sa nechal inšpirovať predlohou z [webovej stránky zadania](https://kurzy.kpi.fei.tuke.sk/fj/labs/05.html). Metódy sa moc nelíšia od predošlého zadania, keďže aj pri tomto zadaní používame rekurziu na výpočet výrazov.
