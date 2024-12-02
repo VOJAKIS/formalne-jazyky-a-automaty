@@ -23,6 +23,8 @@ public class Lexer {
 				return Token.MULTIPLICATION;
 			case '/':
 				return Token.DIVISION;
+			case '^':
+				return Token.EXPONENTIATION;
 			case '(':
 				return Token.LEFT_PARENTHESES;
 			case ')':

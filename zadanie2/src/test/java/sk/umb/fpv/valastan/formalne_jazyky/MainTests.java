@@ -32,6 +32,8 @@ public class MainTests {
 				new InputAndOutput("2/1", 2),
 				new InputAndOutput("9/3", 3),
 				new InputAndOutput("9/(-3)", -3),
+				// Exponentiation
+				new InputAndOutput("2^5", 32),
 				// Sum and multiplication
 				new InputAndOutput("1+2*3", 7),
 				new InputAndOutput("1*2+2", 4),
@@ -61,7 +63,8 @@ public class MainTests {
 				new InputAndOutput("1+-2"),
 				new InputAndOutput("1-+2"),
 				new InputAndOutput("1*-2"),
-				new InputAndOutput("1/-2"));
+				new InputAndOutput("1/-2"),
+				new InputAndOutput("2^+5"));
 
 		inputsAndOutputs.forEach(inputAndOutput -> {
 			System.out.println("\nInput = " + inputAndOutput.getInput());

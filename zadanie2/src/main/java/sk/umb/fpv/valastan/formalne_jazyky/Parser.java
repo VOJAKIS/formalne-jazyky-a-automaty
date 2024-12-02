@@ -5,17 +5,22 @@ import java.util.List;
 
 public class Parser {
 	private final Lexer lexer;
+	private final List<Token> PROHOBITED_TOKENS_AFTER_SIGN = Arrays.asList(
+			Token.PLUS,
+			Token.MINUS,
+			Token.MULTIPLICATION,
+			Token.DIVISION);
 
 	public Parser(Lexer lexer) {
 		this.lexer = lexer;
 	}
 
 	public int statement() {
-		return expr();
+		return E();
 	}
 
-	private int expr() {
-		int value = mul();
+	private int E() {
+		int value = F();
 
 		while (true) {
 			Token next = lexer.nextToken();
@@ -23,15 +28,20 @@ public class Parser {
 				System.out.println("expr next token=" + next);
 			}
 			switch (next) {
+				case EXPONENTIATION:
+					lexer.consume();
+					throwIfNextTokenIsOneOf(PROHOBITED_TOKENS_AFTER_SIGN);
+					value = (int) Math.pow(value, T());
+					break;
 				case PLUS:
 					lexer.consume();
-					throwIfNextTokenIsOneOf(Arrays.asList(Token.PLUS, Token.MINUS, Token.MULTIPLICATION, Token.DIVISION));
-					value += mul();
+					throwIfNextTokenIsOneOf(PROHOBITED_TOKENS_AFTER_SIGN);
+					value += F();
 					break;
 				case MINUS:
 					lexer.consume();
-					throwIfNextTokenIsOneOf(Arrays.asList(Token.PLUS, Token.MINUS, Token.MULTIPLICATION, Token.DIVISION));
-					value -= mul();
+					throwIfNextTokenIsOneOf(PROHOBITED_TOKENS_AFTER_SIGN);
+					value -= F();
 					break;
 				default:
 					return value;
@@ -39,8 +49,8 @@ public class Parser {
 		}
 	}
 
-	private int mul() {
-		int value = term();
+	private int F() {
+		int value = T();
 
 		while (true) {
 			Token next = lexer.nextToken();
@@ -50,13 +60,13 @@ public class Parser {
 			switch (next) {
 				case MULTIPLICATION:
 					lexer.consume();
-					throwIfNextTokenIsOneOf(Arrays.asList(Token.PLUS, Token.MINUS, Token.MULTIPLICATION, Token.DIVISION));
-					value *= term();
+					throwIfNextTokenIsOneOf(PROHOBITED_TOKENS_AFTER_SIGN);
+					value *= T();
 					break;
 				case DIVISION:
 					lexer.consume();
-					throwIfNextTokenIsOneOf(Arrays.asList(Token.PLUS, Token.MINUS, Token.MULTIPLICATION, Token.DIVISION));
-					int temp = term();
+					throwIfNextTokenIsOneOf(PROHOBITED_TOKENS_AFTER_SIGN);
+					int temp = T();
 					if (temp == 0) {
 						throw new ArithmeticException("You cannot divide by zero (not in this case).");
 					}
@@ -68,7 +78,7 @@ public class Parser {
 		}
 	}
 
-	private int term() {
+	private int T() {
 		Token next = lexer.nextToken();
 		if (Main.DEBUG) {
 			System.out.println("term next token=" + next);
@@ -101,7 +111,7 @@ public class Parser {
 				return temp *= timesNumber;
 			case LEFT_PARENTHESES:
 				lexer.consume();
-				int result = expr();
+				int result = E();
 				match(Token.RIGHT_PARENTHESES);
 				lexer.consume();
 				return result;

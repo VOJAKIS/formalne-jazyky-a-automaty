@@ -44,7 +44,7 @@ mvn test
 ## Stručný rozbor riešenia
 1. Riešenie som vypracoval tak, že som si prepísal gramatiku, ktorá bola odprezentovaná na hodine. Všimnime si gramatiku nižšie:
 	```js
-	E -> T { "+" | "-" T }
+	E -> T { "+" | "-" | "^" T }
 	T -> F { "*" | "/" T }
 	F -> [+|-] D | "("E")"
 	D -> "0" - "9" { D }
