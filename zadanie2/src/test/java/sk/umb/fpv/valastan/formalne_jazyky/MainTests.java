@@ -17,18 +17,21 @@ public class MainTests {
 				// Addition
 				new InputAndOutput("1+0", 1),
 				new InputAndOutput("1+2", 3),
-				new InputAndOutput("2-1", 1),
+				new InputAndOutput("2+(-1)", 1),
 				// Subtraction
 				new InputAndOutput("1-0", 1),
 				new InputAndOutput("1-2", -1),
 				new InputAndOutput("5-4", 1),
+				new InputAndOutput("5-(-4)", 9),
 				// Multiplication
 				new InputAndOutput("1*2", 2),
 				new InputAndOutput("1*2*3", 6),
 				new InputAndOutput("1*2*3*4", 24),
+				new InputAndOutput("1*(-2)", -2),
 				// Division
 				new InputAndOutput("2/1", 2),
 				new InputAndOutput("9/3", 3),
+				new InputAndOutput("9/(-3)", -3),
 				// Sum and multiplication
 				new InputAndOutput("1+2*3", 7),
 				new InputAndOutput("1*2+2", 4),
@@ -52,7 +55,11 @@ public class MainTests {
 	public void givenValidInputs_whenMain_thenFailure() {
 		List<InputAndOutput> inputsAndOutputs = Arrays.asList(
 				// Calculator exception inbound
-				new InputAndOutput("1+2*-+", 1));
+				new InputAndOutput("1+2*-+"),
+				new InputAndOutput("1+-2"),
+				new InputAndOutput("1--2"),
+				new InputAndOutput("1*-2"),
+				new InputAndOutput("1/-2"));
 
 		inputsAndOutputs.forEach(inputAndOutput -> {
 			System.out.println("\nInput = " + inputAndOutput.getInput());
