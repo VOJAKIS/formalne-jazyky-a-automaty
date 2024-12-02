@@ -20,7 +20,7 @@ public class Main {
 			String alertForUserInput = String.format("Zadajte výraz na výpočet (napríklad 1+2): ");
 			System.out.print(alertForUserInput);
 			getInputFromUser();
-			while (doesInputContainsVariables()) {
+			while (doesInputContainVariables()) {
 				String inputString = variables.toString();
 				System.out.println("Výraz obsahuje premenné, zadajte hodnoty pre premenné oddelené medzerou: "
 						+ inputString.substring(1, inputString.length() - 1));
@@ -69,7 +69,7 @@ public class Main {
 		scanner.close();
 	}
 
-	private static Boolean doesInputContainsVariables() {
+	private static Boolean doesInputContainVariables() {
 		variables.clear();
 		for (int i = 0; i < inputFromUser.length(); i++) {
 			char currentCharacter = inputFromUser.charAt(i);
