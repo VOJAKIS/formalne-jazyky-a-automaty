@@ -70,6 +70,10 @@ public class Parser {
 			case NUMBER:
 				int temp = lexer.getValue();
 				lexer.consume();
+				while (lexer.nextToken().equals(Token.NUMBER)) {
+					temp = temp * 10 + lexer.getValue();
+					lexer.consume();
+				}
 				return temp;
 			case LEFT_PARENTHESES:
 				lexer.consume();
