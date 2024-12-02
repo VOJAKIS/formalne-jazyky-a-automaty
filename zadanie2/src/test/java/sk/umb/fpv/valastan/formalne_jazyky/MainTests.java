@@ -56,8 +56,10 @@ public class MainTests {
 		List<InputAndOutput> inputsAndOutputs = Arrays.asList(
 				// Calculator exception inbound
 				new InputAndOutput("1+2*-+"),
-				new InputAndOutput("1+-2"),
+				new InputAndOutput("1++2"),
 				new InputAndOutput("1--2"),
+				new InputAndOutput("1+-2"),
+				new InputAndOutput("1-+2"),
 				new InputAndOutput("1*-2"),
 				new InputAndOutput("1/-2"));
 
