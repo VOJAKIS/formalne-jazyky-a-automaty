@@ -47,7 +47,14 @@ mvn test
 	E -> T { "+" | "-" T }
 	T -> F { "*" | "/" T }
 	F -> [+|-] D | "("E")"
-	D -> "0" - "9" D | "0" - "9"
+	D -> "0" - "9" { D }
+	```
+	```bash
+	# Príklad 1+2*(-3)
+	E => T+T => F+T => D+T => 1+T => 1+F*T =>
+	  => 1+D*T => 1+2*T => 1+2*F => 1+2*(E) =>
+	  => 1+2*(T) => 1+2*(F) => 1+2*(-D) => 1+2*(-3) =>
+	  => -5
 	```
 
 2. Pomocou tejto gramatiky som zostrojil dané metódy, pričom som sa nechal inšpirovať predlohou z [webovej stránky zadania](https://kurzy.kpi.fei.tuke.sk/fj/labs/05.html). Metódy sa moc nelíšia od predošlého zadania, keďže aj pri tomto zadaní používame rekurziu na výpočet výrazov.
