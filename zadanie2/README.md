@@ -46,8 +46,8 @@ mvn test
 	```js
 	E -> T { "+" | "-" T }
 	T -> F { "*" | "/" T }
-	F -> D | "("E")"
-	D -> [+|-] { "0" - "9" }
+	F -> [+|-] D | "("E")"
+	D -> "0" - "9" D | "0" - "9"
 	```
 
 2. Pomocou tejto gramatiky som zostrojil dané metódy, pričom som sa nechal inšpirovať predlohou z [webovej stránky zadania](https://kurzy.kpi.fei.tuke.sk/fj/labs/05.html). Metódy sa moc nelíšia od predošlého zadania, keďže aj pri tomto zadaní používame rekurziu na výpočet výrazov.
@@ -67,6 +67,8 @@ mvn test
 2-1 | 1
 2*1 | 2
 8/2 | 4
+1+(-2) | -1
+1+(+2) | 3
 1+2*3 | 7
 (1+2)*3 | 9
 1+x | 2 (dodatočné dosadenie x=1)
@@ -76,5 +78,10 @@ mvn test
 | Neakceptované výrazy |
 |-|
 1++2
+1--2
 1**2
+1//2
+1+-2
+1-+2
+... (a ďalšie kombinácie)
 1+2*-+
